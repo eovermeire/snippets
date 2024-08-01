@@ -3,8 +3,14 @@
 # requirements
 - poetry
 
+# installation
+
+```shell
+python3 -m pip install poetry && poetry env use python3.12 && poetry install
+```
+
 # usage
 
-` ` `shell
-poetry install && poetry run pytest
-` ` `
+```shell
+poetry run pytest
+```
