@@ -1,6 +1,7 @@
 # metaclass
 
 # requirements
+- python 3.12
 - poetry
 
 # installation
