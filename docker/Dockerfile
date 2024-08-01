@@ -1,4 +1,4 @@
-FROM python:3.11.8-slim-bookworm as builder
+FROM python:3.11.8-slim-bookworm AS builder
 
 ARG CONFIG
 
@@ -29,7 +29,7 @@ RUN poetry export --only=main --output=requirements.txt
 RUN python3 -m pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
 
 # Runner
-FROM python:3.11.8-slim-bookworm as runner
+FROM python:3.11.8-slim-bookworm AS runner
 
 WORKDIR /app
 
@@ -47,7 +47,9 @@ ENV VDTL_KAFKA_QUEUE_SIZE=6500000 \
   VDTL_STREAM_HEIGHT=480
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends graphviz libgl1-mesa-glx
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends graphviz libgl1-mesa-glx && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install project dependencies
 COPY --from=builder /app/wheels wheels
